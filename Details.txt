@@ -1,0 +1,34 @@
+Parses the file and puts the integers to a 2D array | 101-103 in sorting_main.c
+    
+    It uses an auxilary function called parse_integers | 9-39
+    Input file contains 5 lines with each of them has 1000 numbers seperated with a space | number_samples.txt
+
+Sorts the parsed integers via BST and puts the sorted values to 2D array sorted numbers, and build times of BST to 1D array called buiLd_times | 104-106 in sorting_main.c
+    
+    Trees have size of 16383 because a bst with height of 14 has at most 16383 nodes
+    It uses a function from sorting_bst.c called finalize_bst
+        
+        finalize_bst is does all necessary operations for building bst
+            empty nodes have value of -1
+            nodation function sets every node to -1 aka clear
+            
+            fill_bst fills the bst with values in correct order
+                inserts the number that located in middle of the number array to correct place in tree array via insert_element (the reason is making balanced tree in bst)
+                inserts the nubmber that located in left part of the array to correct place in tree array via insert_element (recursion to left)
+                inserts the nubmber that located in right part of the array to correct place in tree array via insert_element (recursion to right)
+
+                insert_element insert a single number to tree in correct position
+                    if tree reaches the height of 14 balance_bst will be called
+                    if node is empty number inserted here
+                    else if node < number recursion to left
+                    else if node > number recursion to right (there is no same value in tree)
+
+                    balance_bst adds elements again and balances tree
+                        first, generates a sorted array version called tmp_array of the tree(clears -1s)
+                        then, resets tree to an empty one (only -1s)
+                        fills the tree with numbers in tmp_array via fill_bst (insertion order in fill_bst guarantees that tree will be balanced)
+
+
+Exports results to seperate files via export_results function
+
+        
